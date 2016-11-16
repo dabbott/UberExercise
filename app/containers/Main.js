@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
@@ -7,6 +7,7 @@ import {
   LocationSearchHeader,
   LocationSearchResults,
   SearchResultsList,
+  NavigationIcon,
 } from '../components'
 
 const mapStateToProps = (state) => ({
@@ -30,6 +31,10 @@ class Main extends Component {
 
     return (
       <View style={styles.container}>
+        <NavigationIcon
+          icon={searchResultsOpen ? 'arrow-left' : 'hamburger'}
+          onPress={this.toggleSearchResults}
+        />
         <LocationSearchHeader
           onPress={this.toggleSearchResults}
           expanded={searchResultsOpen}

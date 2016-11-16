@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Dimensions, View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import { StyleSheet, Dimensions, View, TouchableWithoutFeedback, TextInput, TouchableOpacity } from 'react-native'
 import * as Animatable from 'react-native-animatable'
+
+import LocationSearchInput from './LocationSearchInput'
 
 const transitionProps = {
   hoverbar: ['top', 'left', 'height', 'width', 'shadowRadius'],
@@ -22,6 +24,39 @@ export default class LocationSearchHeader extends Component {
   static defaultProps = {
     expanded: false,
     onPress: () => {},
+    onSourceTextChange: () => {},
+    onDestinationTextChange: () => {},
+  }
+
+  state = {
+    sourceText: '',
+    destinationText: '',
+  }
+
+  onSourceTextChange = (sourceText) => {
+    const {onSourceTextChange} = this.props
+
+    this.setState({sourceText})
+    onSourceTextChange(sourceText)
+  }
+
+  onDestinationTextChange = (destinationText) => {
+    const {onDestinationTextChange} = this.props
+
+    this.setState({destinationText})
+    onDestinationTextChange(destinationText)
+  }
+
+  onExpand = () => {
+    const {onPress} = this.props
+
+    onPress()
+
+    setTimeout(() => {
+      if (!this.refs.destinationInput) return
+
+      this.refs.destinationInput.focus()
+    }, 300)
   }
 
   getAnimatableStyles = () => {
@@ -80,7 +115,8 @@ export default class LocationSearchHeader extends Component {
   }
 
   render() {
-    const {onPress} = this.props
+    const {expanded} = this.props
+    const {destinationText} = this.state
     const animatableStyles = this.getAnimatableStyles()
 
     return (
@@ -96,18 +132,27 @@ export default class LocationSearchHeader extends Component {
         >
           Work
         </Animatable.Text>
-        <Animatable.Text
-          style={[styles.destinationText, animatableStyles.destinationText]}
-          transition={transitionProps.destinationText}
-          pointerEvents={'none'}
-        >
-          Where to?
-        </Animatable.Text>
+        {destinationText.length === 0 && (
+          <Animatable.Text
+            style={[styles.destinationText, animatableStyles.destinationText]}
+            transition={transitionProps.destinationText}
+            pointerEvents={'none'}
+          >
+            Where to?
+          </Animatable.Text>
+        )}
         <Animatable.View
           style={[styles.destinationBox, animatableStyles.destinationBox]}
           transition={transitionProps.destinationBox}
-          pointerEvents={'none'}
-        />
+          pointerEvents={'box-none'}
+        >
+          {expanded && (
+            <LocationSearchInput
+              ref={'destinationInput'}
+              onChangeText={this.onDestinationTextChange}
+            />
+          )}
+        </Animatable.View>
         <Animatable.View
           style={[styles.sourceBox, animatableStyles.sourceBox]}
           transition={transitionProps.sourceBox}
@@ -129,7 +174,7 @@ export default class LocationSearchHeader extends Component {
         >
           <TouchableOpacity
             style={styles.target}
-            onPress={onPress}
+            onPress={expanded ? null : this.onExpand}
           />
         </Animatable.View>
       </View>
