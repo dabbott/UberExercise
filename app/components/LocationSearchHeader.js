@@ -1,15 +1,20 @@
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Dimensions, View, TouchableWithoutFeedback, TextInput, TouchableOpacity } from 'react-native'
+import {
+  StyleSheet,
+  Dimensions,
+  View,
+  TouchableWithoutFeedback,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native'
 import * as Animatable from 'react-native-animatable'
-
-import LocationSearchInput from './LocationSearchInput'
 
 const transitionProps = {
   hoverbar: ['top', 'left', 'height', 'width', 'shadowRadius'],
   square: ['top', 'left'],
   destinationBox: ['left', 'height', 'opacity'],
   sourceBox: ['top', 'opacity'],
-  destinationText: ['top', 'left', 'fontSize', 'color'],
+  destinationText: ['top', 'left', 'fontSize', 'color', 'opacity'],
   sourceText: ['top', 'opacity'],
   verticalBar: ['top', 'left', 'opacity'],
   dot: ['top', 'left', 'opacity'],
@@ -26,9 +31,6 @@ export default class LocationSearchHeader extends Component {
     onPress: () => {},
     onSourceTextChange: () => {},
     onDestinationTextChange: () => {},
-  }
-
-  state = {
     sourceText: '',
     destinationText: '',
   }
@@ -43,7 +45,6 @@ export default class LocationSearchHeader extends Component {
   onDestinationTextChange = (destinationText) => {
     const {onDestinationTextChange} = this.props
 
-    this.setState({destinationText})
     onDestinationTextChange(destinationText)
   }
 
@@ -60,7 +61,7 @@ export default class LocationSearchHeader extends Component {
   }
 
   getAnimatableStyles = () => {
-    const {expanded} = this.props
+    const {expanded, destinationText} = this.props
     const {width: windowWidth} = Dimensions.get('window')
     const width = windowWidth - 24 * 2
 
@@ -88,6 +89,7 @@ export default class LocationSearchHeader extends Component {
         top: expanded ? 103 : 112,
         fontSize: expanded ? 15 : 20,
         color: expanded ? '#A4A4AC' : '#525760',
+        opacity: (expanded && destinationText.length !== 0) ? 0 : 1,
       },
       sourceBox: {
         left: 56,
@@ -115,8 +117,7 @@ export default class LocationSearchHeader extends Component {
   }
 
   render() {
-    const {expanded} = this.props
-    const {destinationText} = this.state
+    const {expanded, sourceText, destinationText} = this.props
     const animatableStyles = this.getAnimatableStyles()
 
     return (
@@ -130,25 +131,25 @@ export default class LocationSearchHeader extends Component {
           transition={transitionProps.sourceText}
           pointerEvents={'none'}
         >
-          Work
+          {sourceText}
         </Animatable.Text>
-        {destinationText.length === 0 && (
-          <Animatable.Text
-            style={[styles.destinationText, animatableStyles.destinationText]}
-            transition={transitionProps.destinationText}
-            pointerEvents={'none'}
-          >
-            Where to?
-          </Animatable.Text>
-        )}
+        <Animatable.Text
+          style={[styles.destinationText, animatableStyles.destinationText]}
+          transition={transitionProps.destinationText}
+          pointerEvents={'none'}
+        >
+          {destinationText.length === 0 ? 'Where to?' : destinationText}
+        </Animatable.Text>
         <Animatable.View
           style={[styles.destinationBox, animatableStyles.destinationBox]}
           transition={transitionProps.destinationBox}
           pointerEvents={'box-none'}
         >
           {expanded && (
-            <LocationSearchInput
+            <TextInput
               ref={'destinationInput'}
+              style={styles.input}
+              value={destinationText}
               onChangeText={this.onDestinationTextChange}
             />
           )}
@@ -241,5 +242,13 @@ const styles = StyleSheet.create({
     width: 1,
     backgroundColor: '#A4A4AC',
     zIndex: 2,
+  },
+  input: {
+    flex: 1,
+    color: 'black',
+    backgroundColor: 'transparent',
+    zIndex: 10,
+    fontSize: 15,
+    paddingHorizontal: 10,
   },
 })

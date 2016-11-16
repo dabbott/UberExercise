@@ -18,6 +18,8 @@ class Main extends Component {
 
   state = {
     searchResultsOpen: false,
+    sourceText: 'Work',
+    destinationText: '',
   }
 
   toggleSearchResults = () => {
@@ -26,8 +28,16 @@ class Main extends Component {
     this.setState({searchResultsOpen: !searchResultsOpen})
   }
 
+  onSourceTextChange = (sourceText) => {
+    this.setState({sourceText})
+  }
+
+  onDestinationTextChange = (destinationText) => {
+    this.setState({destinationText})
+  }
+
   render() {
-    const {searchResultsOpen} = this.state
+    const {searchResultsOpen, sourceText, destinationText} = this.state
 
     return (
       <View style={styles.container}>
@@ -38,6 +48,10 @@ class Main extends Component {
         <LocationSearchHeader
           onPress={this.toggleSearchResults}
           expanded={searchResultsOpen}
+          sourceText={sourceText}
+          destinationText={destinationText}
+          onSourceTextChange={this.onSourceTextChange}
+          onDestinationTextChange={this.onDestinationTextChange}
         />
         <LocationSearchResults
           visible={searchResultsOpen}
