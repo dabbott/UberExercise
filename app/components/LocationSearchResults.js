@@ -23,6 +23,8 @@ export default class LocationSearchHeader extends Component {
     return (
       <Animatable.View
         style={[styles.container, style]}
+        duration={300}
+        easing={"ease-out"}
         transition={transitionProps}
       >
         {children}

@@ -3,7 +3,11 @@ import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 
-import { LocationSearchHeader, LocationSearchResults } from '../components'
+import {
+  LocationSearchHeader,
+  LocationSearchResults,
+  SearchResultsList,
+} from '../components'
 
 const mapStateToProps = (state) => ({
 
@@ -32,7 +36,9 @@ class Main extends Component {
         />
         <LocationSearchResults
           visible={searchResultsOpen}
-        />
+        >
+          <SearchResultsList />
+        </LocationSearchResults>
       </View>
     )
   }
