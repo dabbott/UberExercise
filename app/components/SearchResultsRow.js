@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 
+import AssetMap from '../config/AssetMap'
+
 export default class SearchResultsRow extends Component {
 
   static defaultProps = {
-    icon: require('../images/icon-home.png'),
-    title: 'Hello',
-    subtitle: 'World'
+    icon: 'home',
+    title: 'Home',
+    subtitle: 'Earth'
   }
 
   render() {
@@ -17,7 +19,7 @@ export default class SearchResultsRow extends Component {
         <View style={styles.iconContainer}>
           <Image
             style={styles.icon}
-            source={icon}
+            source={AssetMap[icon]}
           />
         </View>
         <View style={styles.textContainer}>

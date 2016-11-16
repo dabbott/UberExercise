@@ -1,10 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, TouchableOpacity, Image } from 'react-native'
 
-const ICON_MAP = {
-  hamburger: require('../images/icon-hamburger.png'),
-  ['arrow-left']: require('../images/icon-arrow-left.png'),
-}
+import AssetMap from '../config/AssetMap'
 
 const hitSlop = {
   top: 10,
@@ -34,7 +31,7 @@ export default class NavigationIcon extends Component {
       >
         <Image
           style={styles.icon}
-          source={ICON_MAP[icon]}
+          source={AssetMap[icon]}
         />
       </TouchableOpacity>
     )

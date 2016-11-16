@@ -5,11 +5,11 @@ import SearchResultsRow from './SearchResultsRow'
 
 // Row data (hard-coded)
 const rows = [
-  {id: 0, title: 'View'},
-  {id: 1, title: 'Text'},
-  {id: 2, title: 'Image'},
-  {id: 3, title: 'ScrollView'},
-  {id: 4, title: 'ListView'},
+  {id: 0, icon: 'home', title: 'Home', subtitle: '123 Spear St, San Francisco'},
+  {id: 1, icon: 'recent', title: 'Zynga HQ', subtitle: '699 8th St, San Francisco'},
+  {id: 2, icon: 'recent', title: 'Facebook HQ', subtitle: '888 Brannan St, San Francisco, CA'},
+  {id: 3, icon: 'recent', title: '123 Apple Road', subtitle: 'Cupertino, CA'},
+  {id: 4, icon: 'recent', title: '445 1st St', subtitle: 'Sunnyvale, CA'},
 ]
 
 // Row comparison function
@@ -34,10 +34,13 @@ export default class SearchResultsList extends Component {
   }
 
   renderRow = (rowData) => {
+    const {title, subtitle, icon} = rowData
+
     return (
       <SearchResultsRow
-        title={rowData.title}
-        subtitle={rowData.title}
+        title={title}
+        subtitle={subtitle}
+        icon={icon}
       />
     )
   }
