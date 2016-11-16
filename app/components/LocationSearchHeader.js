@@ -57,7 +57,7 @@ export default class LocationSearchHeader extends Component {
       if (!this.refs.destinationInput) return
 
       this.refs.destinationInput.focus()
-    }, 300)
+    }, 350)
   }
 
   getAnimatableStyles = () => {
@@ -71,7 +71,7 @@ export default class LocationSearchHeader extends Component {
         left: expanded ? 0 : 24,
         height: expanded ? 136 : 56,
         width: expanded ? windowWidth : width,
-        shadowRadius: expanded ? 10 : 60,
+        shadowRadius: expanded ? 10 / 2 : 60 / 2,
       },
       square: {
         top: expanded ? 109 : 96 + 56 / 2 - SQUARE_SIZE / 2,

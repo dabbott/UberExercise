@@ -6,6 +6,13 @@ const ICON_MAP = {
   ['arrow-left']: require('../images/icon-arrow-left.png'),
 }
 
+const hitSlop = {
+  top: 10,
+  bottom: 10,
+  left: 10,
+  right: 10,
+}
+
 export default class NavigationIcon extends Component {
 
   static propTypes = {
@@ -23,6 +30,7 @@ export default class NavigationIcon extends Component {
       <TouchableOpacity
         style={styles.container}
         onPress={onPress}
+        hitSlop={hitSlop}
       >
         <Image
           style={styles.icon}
