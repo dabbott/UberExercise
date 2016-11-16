@@ -9,6 +9,8 @@ const transitionProps = {
   sourceBox: ['top', 'opacity'],
   destinationText: ['top', 'left', 'fontSize', 'color'],
   sourceText: ['top', 'opacity'],
+  verticalBar: ['top', 'left', 'opacity'],
+  dot: ['top', 'left', 'opacity'],
 }
 
 const SQUARE_SIZE = 6
@@ -64,6 +66,16 @@ export default class LocationSearchHeader extends Component {
         top: expanded ? 64 : 76,
         opacity: expanded ? 1 : 0,
       },
+      verticalBar: {
+        top: expanded ? 78 : 78 + 22 - 5,
+        left: expanded ? 32 : 32 + 22 - 5,
+        opacity: expanded ? 1 : 0,
+      },
+      dot: {
+        top: expanded ? 69 : 69 + 22 - 5,
+        left: expanded ? 29.5 : 29.5 + 22 - 5,
+        opacity: expanded ? 1 : 0,
+      },
     }
   }
 
@@ -102,6 +114,16 @@ export default class LocationSearchHeader extends Component {
           pointerEvents={'none'}
         />
         <Animatable.View
+          style={[styles.verticalBar, animatableStyles.verticalBar]}
+          transition={transitionProps.verticalBar}
+          pointerEvents={'none'}
+        />
+        <Animatable.View
+          style={[styles.dot, animatableStyles.dot]}
+          transition={transitionProps.dot}
+          pointerEvents={'none'}
+        />
+        <Animatable.View
           style={[styles.hoverbar, animatableStyles.hoverbar]}
           transition={transitionProps.hoverbar}
         >
@@ -137,6 +159,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     zIndex: 2,
   },
+  dot: {
+    position: 'absolute',
+    width: SQUARE_SIZE,
+    height: SQUARE_SIZE,
+    borderRadius: SQUARE_SIZE / 2,
+    backgroundColor: '#A4A4AC',
+    zIndex: 2,
+  },
   destinationBox: {
     position: 'absolute',
     backgroundColor: '#EDEDED',
@@ -159,5 +189,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9F9F9',
     borderRadius: 4,
     zIndex: 3,
+  },
+  verticalBar: {
+    position: 'absolute',
+    height: 28,
+    width: 1,
+    backgroundColor: '#A4A4AC',
+    zIndex: 2,
   },
 })
