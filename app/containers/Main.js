@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
+import MapView from 'react-native-maps'
 
 import {
   LocationSearchHeader,
@@ -58,6 +59,7 @@ class Main extends Component {
         >
           <SearchResultsList />
         </LocationSearchResults>
+        <MapView style={styles.map} />
       </View>
     )
   }
@@ -68,6 +70,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#EEE',
   },
+  map: {
+    flex: 1,
+    zIndex: -1,
+  }
 })
 
 export default connect(mapStateToProps)(Main)

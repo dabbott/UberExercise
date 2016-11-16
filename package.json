@@ -11,6 +11,7 @@
 		"react": "~15.3.1",
 		"react-native": "0.37.0",
 		"react-native-animatable": "^0.6.1",
+		"react-native-maps": "^0.11.0",
 		"react-native-router-flux": "^3.37.0",
 		"react-redux": "^4.4.6",
 		"redux": "^3.6.0",
