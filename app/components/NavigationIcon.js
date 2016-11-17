@@ -13,41 +13,11 @@ const hitSlop = {
 
 export default class NavigationIcon extends Component {
 
-  static propTypes = {
-    icon: PropTypes.string.isRequired,
-  }
-
-  static defaultProps = {
-    onPress: () => {}
-  }
-
   render() {
-    const {onPress, icon} = this.props
-
-    return (
-      <TouchableOpacity
-        style={styles.container}
-        onPress={onPress}
-        hitSlop={hitSlop}
-      >
-        <Image
-          style={styles.icon}
-          source={AssetMap[icon]}
-        />
-      </TouchableOpacity>
-    )
+    return null
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 36,
-    left: 22,
-    zIndex: 10,
-  },
-  icon: {
-    width: 21,
-    height: 21,
-  },
+
 })

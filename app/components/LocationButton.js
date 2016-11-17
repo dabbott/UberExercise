@@ -5,26 +5,8 @@ import AssetMap from '../config/AssetMap'
 
 export default class LocationButton extends Component {
 
-  static defaultProps = {
-    icon: 'home',
-    onPress: () => {},
-  }
-
   render() {
-    const {onPress, icon} = this.props
-
-    return (
-      <TouchableOpacity
-        style={styles.container}
-        onPress={onPress}
-        activeOpacity={0.5}
-      >
-        <Image
-          style={styles.image}
-          source={AssetMap[icon]}
-        />
-      </TouchableOpacity>
-    )
+    return null
   }
 }
 
