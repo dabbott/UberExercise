@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
+import { connect } from 'react-redux'
+import { Actions } from 'react-native-router-flux'
 import MapView from 'react-native-maps'
 
 import {
@@ -10,7 +12,12 @@ import {
   NavigationIcon,
 } from '../components'
 
-export default class Main extends Component {
+const mapStateToProps = (state) => ({
+  recentLocations: state.recentLocations,
+  shortcutLocations: state.recentLocations.slice(0, 3),
+})
+
+class Main extends Component {
 
   state = {
     searchResultsOpen: false,
@@ -56,6 +63,7 @@ export default class Main extends Component {
   }
 
   render() {
+    const {recentLocations, shortcutLocations} = this.props
     const {searchResultsOpen, sourceText, destinationText, region, position} = this.state
 
     return (
@@ -72,9 +80,12 @@ export default class Main extends Component {
           onSourceTextChange={this.onSourceTextChange}
           onDestinationTextChange={this.onDestinationTextChange}
         />
-        <LocationButtonGroup visible={!searchResultsOpen} />
+        <LocationButtonGroup
+          visible={!searchResultsOpen}
+          locations={shortcutLocations}
+        />
         <LocationSearchResults visible={searchResultsOpen}>
-          <SearchResultsList />
+          <SearchResultsList list={recentLocations} />
         </LocationSearchResults>
         <MapView
           style={styles.map}
@@ -112,3 +123,5 @@ const styles = StyleSheet.create({
     zIndex: -1,
   }
 })
+
+export default connect(mapStateToProps)(Main)

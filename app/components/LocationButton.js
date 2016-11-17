@@ -17,7 +17,7 @@ export default class LocationButton extends Component {
       <TouchableOpacity
         style={styles.container}
         onPress={onPress}
-        activeOpacity={0.8}
+        activeOpacity={0.5}
       >
         <Image
           style={styles.image}

@@ -10,21 +10,23 @@ export default class LocationButtonGroup extends Component {
 
   static defaultProps = {
     visible: true,
-    locations: [
-      {icon: 'home', title: 'Home'},
-      {icon: 'recent', title: 'Zynga HQ'},
-      {icon: 'recent', title: 'Facebook HQ'},
-    ],
+    locations: [],
     onPressLocation: () => {},
   }
 
-  renderItem({icon, title}, i) {
+  renderItem = (location, i) => {
+    const {icon, title} = location
+    const {onPressLocation} = this.props
+
     return (
       <View
         style={styles.item}
         key={i}
       >
-        <LocationButton icon={icon} />
+        <LocationButton
+          icon={icon}
+          onPress={onPressLocation.bind(this, location)}
+        />
         <View style={styles.itemSpacer} />
         <Text style={styles.itemText}>
           {title}
@@ -34,7 +36,7 @@ export default class LocationButtonGroup extends Component {
   }
 
   render() {
-    const {onPressLocation, locations, visible} = this.props
+    const {locations, visible} = this.props
     const {height: windowHeight, width: windowWidth} = Dimensions.get('window')
 
     const containerStyle = {
@@ -48,7 +50,6 @@ export default class LocationButtonGroup extends Component {
     return (
       <Animatable.View
         style={[styles.container, containerStyle]}
-        // onPress={onPressLocation}
         easing={'ease-in-out'}
         duration={300}
         transition={transitionProps}
