@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
-import { connect } from 'react-redux'
-import { Actions } from 'react-native-router-flux'
 import MapView from 'react-native-maps'
 
 import {
@@ -12,11 +10,7 @@ import {
   NavigationIcon,
 } from '../components'
 
-const mapStateToProps = (state) => ({
-
-})
-
-class Main extends Component {
+export default class Main extends Component {
 
   state = {
     searchResultsOpen: false,
@@ -45,10 +39,6 @@ class Main extends Component {
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     )
-    // this.watchID = navigator.geolocation.watchPosition((position) => {
-    //   const lastPosition = JSON.stringify(position)
-    //   this.setState({lastPosition})
-    // })
   }
 
   toggleSearchResults = () => {
@@ -122,5 +112,3 @@ const styles = StyleSheet.create({
     zIndex: -1,
   }
 })
-
-export default connect(mapStateToProps)(Main)

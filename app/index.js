@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
-import configureStore from './store/configureStore'
 import Router from './containers/Router'
 
-const store = configureStore()
+// This app doesn't use redux for anything currently,
+// but feel free to expand the app to use real data.
+const store = createStore(() => {})
 
 export default class App extends Component {
   render() {

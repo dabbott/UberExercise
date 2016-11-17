@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Router, Scene } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
-import Sample from './Sample'
 import Main from './Main'
 
 class AppRouter extends Component {

@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, Image } from 'react-native'
 
 import AssetMap from '../config/AssetMap'
 
+// Expand the touch target around the icon
 const hitSlop = {
   top: 10,
   bottom: 10,
